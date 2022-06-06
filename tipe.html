@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Un détecteur d'obstacles pour malvoyants</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <style>body{overflow-y:scroll;font:16px monospace,monospace}pre{margin:0;overflow-x:hidden}.t{text-decoration:none}@media(max-width:999px){body{font-size:1.94vw}}@media(prefers-color-scheme:dark){body{background:#000;color:#fff}a{color:#6CF}#l{color:#F33}#g{filter:invert(1)}}img,#b{max-width:80ch}span{display:inline-block}</style>
+</head>
+<body>
+<div style="display:table;margin:16px auto" id="a"><div id="b"><pre>
+
+
+
+Un détecteur d'obstacles pour malvoyants
+________________________________________________________________________________
+
+Projet réalisé lors du TIPE.
+
+
+* Contexte ............................................................... [<a class="t" href="#001">001</a>]
+* Présentation du produit fini ........................................... [<a class="t" href="#002">002</a>]
+* Fabrication ............................................................ [<a class="t" href="#003">003</a>]
+    * Achat des composants ............................................... [<a class="t" href="#004">004</a>]
+    * Soudure ............................................................ [<a class="t" href="#005">005</a>]
+    * Installation du logiciel sur le microcontrôleur .................... [<a class="t" href="#006">006</a>]
+* Liens .................................................................. [<a class="t" href="#007">007</a>]
+
+
+
+<span id="001">[<a class="t" href="#001">001</a>]</span> Contexte
+________________________________________________________________________________
+
+Avec plusieurs dizaines de millions de personnes touchées selon l'Organisation
+Mondiale de la Santé [<a class="t" href="#1">1</a>], et potentiellement trois fois plus d'ici 2050 selon le
+journal médical The Lancet [<a class="t" href="#2">2</a>], la cécité est une problématique majeure de santé
+publique. Les conséquences des déficiences visuelles sont lourdes et nombreuses,
+par exemple dans la mobilité.
+
+Les solutions les plus communes, comme la canne blanche ou les chiens-guides,
+présentent toutes des problèmes : la canne a une portée limitée, le chien-guide
+nécessite une logistique plus importante. De plus, ces solutions ne permettent
+pas de détecter certains obstacles, notamment ceux situés en hauteur (au dessus
+du bassin).
+
+Pour répondre à ces problématiques, des entreprises commercialisent des cannes
+électroniques permettant aux déficients visuels de détecter les obstacles les
+plus proches. On peut citer CECIAA, Visioptronic ou GoSense, avec respectivement
+l'Ultracane [<a class="t" href="#3">3</a>], Tom Pouce [<a class="t" href="#4">4</a>] et Rango. La perception de l'environnement proche
+est effectuée par des capteurs de distance, dont la portée dépasse dix mètres
+pour Tom Pouce. Les informations sont ensuite communiquées à l'utilisateur par
+le biais de vibrations. Cependant, ces solutions sont très peu démocratisées car
+très onéreuses (environ 1000 euros pour l'Utracane et 5000 euros pour Tom Pouce)
+et complexes à prendre en main : pour Tom Pouce, une formation de 30 heures
+semble nécessaire, pour des résultats partiellement convaincants [<a class="t" href="#5">5</a>]. De plus,
+les cannes sont visuellement discriminantes.
+
+L'objectif de ce projet est de proposer une alternative <i>open-source</i>, abordable
+économiquement et réalisable sans connaissances techniques préalables.
+
+
+
+<span id="002">[<a class="t" href="#002">002</a>]</span> Présentation du produit fini
+________________________________________________________________________________
+
+Le produit fonctionne de la façon suivante: un capteur détermine la distance de
+l'obstacle le plus proche, puis l'information est communiquée à l'utilisateur
+par un vibreur. Les vibrations sont d'autant plus fortes que l'obstacle est
+proche, et s'arrêtent pour un obstacle situé à plus de 2 mètres de distance.
+
+Le faisceau de détection est volontairement très directif : l'idée est de
+balayer l'environnement avec des petits mouvements de la main.
+
+Le dispositif s'allume dès lors qu'il est branché (port micro-USB), par exemple
+à une batterie externe. L'externalisation de la source d'énergie permet un
+produit fini compact et maniable, et offre de la flexibilité à l'utilisateur,
+qui peut s'équiper de batteries adaptées à son usage.
+
+<div align="center"><img src="images/produit_fini.jpg" height="400px">   <img src="images/produit_fini_main.jpg" height="400px"></div>
+
+Le coût total du produit est inférieur à 40 euros, frais de port exclus. Sa
+fabrication nécessite un matériel générique, disponible dans des ateliers
+partagés, ou à l'achat (pour moins de 30 euros).
+
+
+
+<span id="003">[<a class="t" href="#003">003</a>]</span> Fabrication
+________________________________________________________________________________
+
+Certaines étapes de ce tutoriel ne sont pas détaillées : des tutoriels associés
+se trouvent facilement en ligne.
+
+
+--<span id="004">[<a class="t" href="#004">004</a>]</span> Achat des composants ---------------------------------------------------
+
+Composants nécessaires :
+
+* Microcontrôleur : Arduino Nano Every (8,80 € chez <a href="https://store.arduino.cc/products/arduino-nano-every">Arduino</a>, non brochée)
+* Capteur de distance : VL53L1X (19,40 € chez <a href="https://www.gotronic.fr/art-capteur-de-distance-4m-3415-28058.htm">Gotronic</a>)
+* Vibreur : VPM2 (4,20 € chez <a href="https://www.gotronic.fr/art-vibreur-vpm2-12006.htm">Gotronic</a>)
+* Des ponts de connexion (6,80 € chez <a href="https://www.gotronic.fr/art-boite-de-140-ponts-de-connexion-6864.htm">Gotronic</a>)
+* Scotch double face (idéalement de quelques milimètres d'épaiseur)
+
+Matériel nécessaire, si l'accès à un atelier partagé n'est pas possible : 
+
+* Station de soudage (17,90 € chez <a href="https://www.gotronic.fr/art-station-vtss4n-16972.htm">Gotronic</a>)
+* Pompe à dessouder (3,50 € chez <a href="https://www.gotronic.fr/art-pompe-a-dessouder-ppd01-7402.htm">Gotronic</a>)
+* Fil de soudure (8,30 € chez <a href="https://www.gotronic.fr/art-soudure-esp002-50-28648.htm">Gotronic</a>)
+
+
+--<span id="005">[<a class="t" href="#005">005</a>]</span> Soudure ----------------------------------------------------------------
+
+1. Identifier les pins du vibreur et du microcontrôleur 
+2. Scotcher le capteur de distance sur le dos du microcontrôleur (voir <a href="images/produit_fini.jpg">photo</a>)
+3. Réaliser les connexions entre le capteur de distance et le microcontrôleur à
+   l'aide des ponts de connexions (se référer au <a href="images/schema_soudure.jpg">schéma de soudure</a> ci-dessous)
+4. Scotcher le vibreur sur le dos du microcontrôleur (voir <a href="images/produit_fini.jpg">photo</a>)
+5. Réaliser les connexions entre le vibreur et le microcontrôleur (se référer au
+   <a href="images/schema_soudure.jpg">schéma de soudure</a> ci-dessous)
+
+<div align="center"><img src="images/schema_soudure.jpg" height="400px"></div>
+
+--<span id="006">[<a class="t" href="#006">006</a>]</span> Installation du logiciel sur le microcontrôleur ------------------------
+
+1. Télécharger le code pour le microcontrôleur, disponible sur <a href="https://github.com/arthur-jacquin/tipe/blob/main/code.ino">github.com</a>
+2. Installer puis lancer <a href="https://www.arduino.cc/en/software">Arduino IDE</a>
+3. Installer le driver pour l'Arduino Nano Every
+4. Sélectionner la carte et le port adéquat
+5. Téleverser le code sur le microcontrôleur
+
+
+Le produit devrait à présent fonctionner. Il suffit de le brancher à une source
+d'alimentation, par exemple une batterie externe ou un ordinateur.
+
+
+
+<span id="007">[<a class="t" href="#007">007</a>]</span> Liens
+________________________________________________________________________________
+
+* Page de présentation du projet : <a href="tipe">jacquin.xyz</a>
+* Support de présentation du TIPE : <a href="tipe_slideshow">jacquin.xyz</a>
+* Ensemble des ressources disponibles : <a href="https://github.com/arthur-jacquin/tipe">github.com</a>
+* Contact : <a href="mailto:arthur@jacquin.xyz">arthur@jacquin.xyz</a>
+
+
+
+________________________________________________________________________________
+
+<span id="1">[<a class="t" href="#1">1</a>]</span> ORGANISATION MONDIALE DE LA SANTÉ (OMS) : Cécité et déficience visuelle :
+    <a href="https://www.who.int/fr/news-room/fact-sheets/detail/blindness-and-visual-impairment">who.int</a>
+<span id="2">[<a class="t" href="#2">2</a>]</span> RUPERT R.A. BOURNE AND AL. ON BEHALF OF THE VISION LOSS EXPERT GROUP :
+    Magnitude, temporal trends, and projections of the global prevalence of
+    blindness and distance and near vision impairment: a systematic review and
+    meta-analysis : <i>The Lancet Global Health, Volume 5, Issue 9 (2017),
+    e888 - e897</i>
+<span id="3">[<a class="t" href="#3">3</a>]</span> CECIAA SAS : Canne blanche électronique : <a href="https://www.ceciaa.com/ultracane.html">ceciaa.com</a>
+<span id="4">[<a class="t" href="#4">4</a>]</span> FONDATION VISIO : Cannes blanches électroniques pour personnes aveugles ou
+    malvoyantes : <a href="http://visioptronic.fr/fr">visioptronic.fr</a>
+<span id="5">[<a class="t" href="#5">5</a>]</span> RENÉ FARCY, ROGER LEROUX, ALAIN JUCHA, ROLAND DAMASCHINI, COLETTE GRÉGOIRE
+    AND AZIZ ZOGAGHI : Electronic travel aids and electronic orientation aids
+    for blind people: technical, rehabilitation and everyday life points of
+    view : <i>Proceedings of the Conference and Workshop on Assistive Technology
+    for People with Vision and Hearing Impairment (CVHI), 2006</i>
+<span id="6">[<a class="t" href="#6">6</a>]</span> DAVID ABREU, JONAY TOLEDO, BENITO CODINA AND ARMINDA SUÁREZ : Low-Cost
+    Ultrasonic Range Improvements for an Assistive Device : <i>Sensors, Volume 21,
+    Issue 12 (2021), 4250</i>
+</pre></div></div>
+</body></html>
